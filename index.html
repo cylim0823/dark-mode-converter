@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dark Mode Converter</title>
+  </head>
+  <body>
+    <main id="app" class="app-shell">
+      <section class="intro" aria-labelledby="app-title">
+        <h1 id="app-title">Dark Mode Converter</h1>
+        <p class="intro-copy">
+          Drop one file or a batch. PDF files are converted to dark mode locally;
+          Word and PowerPoint files are checked locally and kept private.
+        </p>
+      </section>
+
+      <section class="tool-layout" aria-label="PDF conversion workspace">
+        <div class="control-panel">
+          <div class="panel-heading">
+            <h2>Convert locally</h2>
+            <p>PDFs are converted one at a time to keep browser memory steady.</p>
+          </div>
+
+          <div id="dropZone" class="upload-zone" tabindex="0" role="button" aria-label="Choose or drop files">
+            <input
+              id="fileInput"
+              class="file-input"
+              type="file"
+              multiple
+              accept=".pdf,.doc,.docx,.ppt,.pptx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.ms-powerpoint,application/vnd.openxmlformats-officedocument.presentationml.presentation"
+            />
+            <p class="upload-title">Drop files here</p>
+            <p class="upload-copy">PDF, Word, and PowerPoint files are accepted.</p>
+            <button id="browseButton" class="button secondary" type="button">Choose files</button>
+          </div>
+
+          <dl class="file-details" aria-label="Selected file details">
+            <div>
+              <dt>Files</dt>
+              <dd id="fileName">No files selected</dd>
+            </div>
+            <div>
+              <dt>Size</dt>
+              <dd id="fileSize">-</dd>
+            </div>
+            <div>
+              <dt>Pages</dt>
+              <dd id="pageCount">-</dd>
+            </div>
+          </dl>
+
+          <fieldset class="settings">
+            <legend>Dark mode settings</legend>
+
+            <label for="styleSelect">Conversion style</label>
+            <select id="styleSelect">
+              <option value="classic">Classic Invert</option>
+              <option value="soft">Soft Dark</option>
+              <option value="contrast">High Contrast</option>
+              <option value="warm">Warm Dark</option>
+            </select>
+
+            <label for="strengthSlider">Strength <span id="strengthValue">85%</span></label>
+            <input id="strengthSlider" type="range" min="0" max="100" value="85" />
+
+            <label for="qualitySelect">Render quality</label>
+            <select id="qualitySelect">
+              <option value="low">Low</option>
+              <option value="high" selected>High</option>
+            </select>
+          </fieldset>
+
+          <button id="convertButton" class="button primary" type="button" disabled>Convert</button>
+          <a id="downloadLink" class="button download is-disabled" href="#" download>Download converted PDF</a>
+          <div id="downloadList" class="download-list"></div>
+
+          <div class="status-panel" aria-live="polite">
+            <p id="progressText" class="progress-text"></p>
+            <p id="successText" class="success-text"></p>
+          </div>
+          <p id="errorText" class="error-text" role="alert" aria-live="assertive"></p>
+        </div>
+
+        <div class="preview-panel">
+          <div class="preview-header">
+            <h2>Dark preview</h2>
+            <span id="previewStatus">Waiting for files</span>
+          </div>
+          <div class="preview-controls" aria-label="Preview page controls">
+            <button id="previousPreviewButton" class="icon-button" type="button" disabled aria-label="Previous preview page">&lt;</button>
+            <label class="preview-page-picker" for="previewPageInput">
+              <span>Page</span>
+              <input id="previewPageInput" type="number" min="1" step="1" value="1" disabled />
+              <span id="previewPageTotalText">of -</span>
+            </label>
+            <button id="nextPreviewButton" class="icon-button" type="button" disabled aria-label="Next preview page">&gt;</button>
+          </div>
+          <div id="previewFrame" class="preview-frame">
+            <p class="preview-empty">Dark preview appears after a valid PDF is loaded.</p>
+          </div>
+          <ul id="selectedFileList" class="file-list"></ul>
+        </div>
+      </section>
+    </main>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

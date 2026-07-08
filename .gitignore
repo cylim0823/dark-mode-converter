@@ -1,0 +1,8 @@
+node_modules/
+dist/
+.pnpm-store/
+vendor/
+.git.stale-empty/
+
+.DS_Store
+Thumbs.db
