@@ -2,11 +2,7 @@
 
 A simple web app for turning PDFs into dark-mode PDFs in the browser.
 
-Live website:
-
-```text
-https://cylim0823.github.io/dark-mode-converter/
-```
+Live website: [https://cylim0823.github.io/dark-mode-converter/](https://cylim0823.github.io/dark-mode-converter/)
 
 The app runs entirely in the browser. PDF conversion happens locally on the user's device, with no backend server, login, account, or upload step.
 
@@ -99,10 +95,7 @@ http://localhost:4173/
 ## Deployment
 
 The app is published as a GitHub Pages static website:
-
-```text
-https://cylim0823.github.io/dark-mode-converter/
-```
+[https://cylim0823.github.io/dark-mode-converter/](https://cylim0823.github.io/dark-mode-converter/)
 
 Deployment is handled by GitHub Actions from the `main` branch. For a GitHub Pages project-site build, use:
 
@@ -123,23 +116,3 @@ npm run build
 ```
 
 After pushing to `main`, check the GitHub Actions deployment run and then verify the live URL above.
-
-## Manual Testing Checklist
-
-Test with:
-
-* 1-page PDF
-* Multi-page PDF
-* PDF with images
-* PDF with colored highlights
-* PDF with black text on white background
-* PDF with scanned pages
-* PDF with colored charts
-* Large PDF
-* Mobile browser
-* Download behavior after conversion
-* Warm Dark style
-* Batch dark conversion with multiple PDFs
-* Switching preview between selected PDFs
-* Removing a selected file before conversion
-* Word/PPT file selection
