@@ -45,6 +45,7 @@
 html {
   min-width: 320px;
   background: var(--color-bg);
+  scrollbar-gutter: stable;
 }
 
 body {
@@ -52,6 +53,7 @@ body {
   min-height: 100vh;
   margin: 0;
   background: var(--color-bg);
+  overflow-y: scroll;
 }
 
 button,
@@ -129,6 +131,7 @@ h2 {
 
 .control-panel,
 .preview-panel {
+  min-width: 0;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   background: var(--color-surface);
@@ -366,6 +369,7 @@ body.is-working .button.primary {
 .status-panel {
   display: none;
   gap: var(--space-1);
+  min-width: 0;
   min-height: auto;
   border-color: var(--color-border);
   background: var(--color-surface-muted);
@@ -393,6 +397,13 @@ body.is-working .button.primary {
   line-height: 1.45;
 }
 
+.progress-text,
+.success-text,
+.error-text {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
 .error-text:not(:empty) {
   display: block;
 }
@@ -402,16 +413,19 @@ body.is-working .button.primary {
   align-items: center;
   justify-content: space-between;
   gap: var(--space-4);
+  min-width: 0;
   margin-bottom: var(--space-3);
 }
 
 .preview-header span {
+  max-width: 100%;
   border-radius: 999px;
   padding: 5px 10px;
   background: var(--color-surface-raised);
   color: var(--color-text);
   font-size: 0.9rem;
   font-weight: 850;
+  overflow-wrap: anywhere;
   white-space: nowrap;
 }
 
@@ -516,6 +530,7 @@ body.is-working .button.primary {
   gap: 18px;
   min-height: 560px;
   overflow: auto;
+  scrollbar-gutter: stable both-edges;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   padding: var(--space-5);
@@ -553,8 +568,11 @@ body.is-working .button.primary {
 }
 
 .preview-canvas {
-  width: 100%;
+  display: block;
+  max-width: 100%;
+  width: auto;
   height: auto;
+  flex: 0 0 auto;
   box-shadow: none;
   opacity: 1;
   transform: translateY(0);

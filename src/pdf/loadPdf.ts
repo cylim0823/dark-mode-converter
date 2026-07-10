@@ -51,6 +51,10 @@ function getFriendlyPdfError(error: unknown): string {
   const message = getErrorText(error, "message").toLowerCase();
   const code = getErrorText(error, "code").toLowerCase();
 
+  if (error instanceof Error && isValidationErrorMessage(message)) {
+    return error.message;
+  }
+
   if (name.includes("password") || message.includes("password") || code.includes("password")) {
     return "This PDF appears to be password-protected. Please unlock it and try again.";
   }
@@ -67,6 +71,14 @@ function getFriendlyPdfError(error: unknown): string {
   }
 
   return "The PDF could not be loaded. Please try another file.";
+}
+
+function isValidationErrorMessage(message: string): boolean {
+  return (
+    message.includes("please choose a pdf") ||
+    message.includes("appears to be empty") ||
+    message.includes("very large for browser memory")
+  );
 }
 
 function getErrorText(error: unknown, key: "name" | "message" | "code"): string {

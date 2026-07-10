@@ -10,14 +10,16 @@ export async function renderPdfPageToCanvas(
   const page = await pdf.getPage(pageNumber);
   const viewport = page.getViewport({ scale });
   const canvas = document.createElement("canvas");
+  const canvasWidth = Math.ceil(viewport.width);
+  const canvasHeight = Math.ceil(viewport.height);
 
   try {
-    canvas.width = Math.ceil(viewport.width);
-    canvas.height = Math.ceil(viewport.height);
-
-    if (canvas.width * canvas.height > MAX_CANVAS_PIXELS) {
+    if (canvasWidth * canvasHeight > MAX_CANVAS_PIXELS) {
       throw new Error("This page is too large for the selected render quality. Try Low quality.");
     }
+
+    canvas.width = canvasWidth;
+    canvas.height = canvasHeight;
 
     const context = canvas.getContext("2d", { willReadFrequently: true });
 

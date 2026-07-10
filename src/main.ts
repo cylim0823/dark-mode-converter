@@ -144,9 +144,9 @@ async function handleSelectedFiles(files: File[]): Promise<void> {
   }
 
   if (selectedPdfFiles.length === 0) {
-    convertButton.disabled = selectedOfficeFiles.length === 0;
+    convertButton.disabled = true;
     if (selectedOfficeFiles.length > 0) {
-      progressText.textContent = "Word or PowerPoint selected.";
+      progressText.textContent = "Word or PowerPoint selected. Add a PDF to convert.";
     } else {
       showError(new Error("No convertible PDF files were found."));
     }
@@ -301,8 +301,8 @@ async function removeSelectedFile(indexToRemove: number): Promise<void> {
     } else {
       resetPreview();
       await resetLoadedPreviewPdf();
-      convertButton.disabled = selectedOfficeFiles.length === 0;
-      progressText.textContent = selectedOfficeFiles.length > 0 ? "Word or PowerPoint selected." : "";
+      convertButton.disabled = true;
+      progressText.textContent = selectedOfficeFiles.length > 0 ? "Word or PowerPoint selected. Add a PDF to convert." : "";
     }
     return;
   }
@@ -310,7 +310,7 @@ async function removeSelectedFile(indexToRemove: number): Promise<void> {
   if (state.pdf) {
     updatePageCountForPreview(state.pdf.numPages);
   }
-  convertButton.disabled = selectedPdfFiles.length === 0 && selectedOfficeFiles.length === 0;
+  convertButton.disabled = selectedPdfFiles.length === 0;
   renderSelectedFiles();
 }
 
@@ -532,7 +532,7 @@ function resetDownloads(): void {
 
 function setBusy(isBusy: boolean, message?: string): void {
   state.isConverting = isBusy;
-  convertButton.disabled = isBusy || (selectedPdfFiles.length === 0 && selectedOfficeFiles.length === 0);
+  convertButton.disabled = isBusy || selectedPdfFiles.length === 0;
   browseButton.disabled = isBusy;
   fileInput.disabled = isBusy;
   dropZone.classList.toggle("is-busy", isBusy);
